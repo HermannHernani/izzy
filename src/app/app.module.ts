@@ -4,26 +4,34 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
+import { GoogleMaps } from '@ionic-native/google-maps';
+import { Component } from "@angular/core/";
+
+
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { MapaPage } from '../pages/mapa/mapa';
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    MapaPage
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage
+    HomePage,
+    MapaPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    GoogleMaps,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,6 +1,7 @@
 {
-  "name": "izzy",
-  "app_id": "",
-  "type": "ionic-angular",
-  "integrations": {}
+  "name": "modelo1",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
 }
