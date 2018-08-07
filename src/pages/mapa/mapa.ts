@@ -1,4 +1,3 @@
-///<reference path="../../../node_modules/@ionic-native/google-maps/index.d.ts"/>
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {
@@ -6,29 +5,34 @@ import {
   GoogleMap,
   GoogleMapsEvent,
   GoogleMapOptions,
-  CameraPosition,
-  MarkerOptions,
-  Marker
+  Marker,
+  MyLocation
 } from '@ionic-native/google-maps';
+/**
+ * Generated class for the MapaPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
-
 @Component({
   selector: 'page-mapa',
   templateUrl: 'mapa.html',
 })
 export class MapaPage {
-  map: GoogleMap;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public googleMaps: GoogleMaps) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
+  map: GoogleMap;
+
   ionViewDidLoad() {
-    console.log('ionViewDidLoad MapaPage');
     this.loadMap();
   }
 
   loadMap() {
+
     let mapOptions: GoogleMapOptions = {
       camera: {
         target: {
@@ -39,8 +43,41 @@ export class MapaPage {
         tilt: 30
       }
     };
+
     this.map = GoogleMaps.create('map_canvas', mapOptions);
+
+  }
+  onButtonClick() {
+    this.map.clear();
+
+    // Get the location of you
+    this.map.getMyLocation()
+      .then((location: MyLocation) => {
+        console.log(JSON.stringify(location, null ,2));
+
+        // Move the map camera to the location with animation
+        this.map.animateCamera({
+          target: location.latLng,
+          zoom: 17,
+          tilt: 30
+        })
+          .then(() => {
+            // add a marker
+            let marker: Marker = this.map.addMarkerSync({
+              title: '@ionic-native/google-maps plugin!',
+              snippet: 'This plugin is awesome!',
+              position: location.latLng,
+            });
+
+            // show the infoWindow
+            marker.showInfoWindow();
+
+            // If clicked it, display the alert
+            // marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
+            //   this.showToast('clicked!');
+            // });
+          });
+      });
   }
 
 }
-

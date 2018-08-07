@@ -1,13 +1,16 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      Projeto 1
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
-  <button (click)="abreMapa()" ion-button block>ABRIR MAPA</button>
+    <h2>Usando a Camera em Ionic 3</h2>
+    <button (click)="abreCamera()" ion-button block>Camera</button>
+    <img src="{{base64Image}}">
+    <button (click)="abreMapa()" ion-button block>Mapa</button>
 
 </ion-content>
+

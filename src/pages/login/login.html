@@ -1,5 +1,5 @@
 <!--
-  Generated template for the MapaPage page.
+  Generated template for the LoginPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
@@ -7,14 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>Mapa</ion-title>
+    <ion-title>Login</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <div id="map_canvas">
-    <button ion-button (click)="onButtonClick($event)">Start demo</button>
-  </div>
+  <p>{{msg}}</p>
+  <button (click)="login()" ion-button block>ENTRAR</button>
 </ion-content>

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import { MapaPage} from "../mapa/mapa";
+import { Camera, CameraOptions } from "@ionic-native/camera";
+
+import { MapaPage } from "../mapa/mapa";
 
 @Component({
   selector: 'page-home',
@@ -8,12 +10,27 @@ import { MapaPage} from "../mapa/mapa";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private camera: Camera) {
 
   }
+
+  abreCamera() {
+    let config: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+      this.camera.getPicture(config).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+      // Handle error
+    })
+  };
   abreMapa(){
     this.navCtrl.push(MapaPage);
-
-
   }
+
 }
